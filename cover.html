@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="http://cdn.popcornjs.org/code/dist/popcorn-complete.js"></script>
-    <script src="https://raw.github.com/rwaldron/popcorn.sequence/master/popcorn.sequence.js"></script>
+    <script src="js/sequence.js"></script>
     <link href="cover.css" rel="stylesheet">
     <style>
     .form-control {
@@ -48,7 +48,7 @@
             </div>
           </div>
 
-          <div class="inner cover" id="toempty">
+          <div class="inner cover"  id="toempty">
             <h1 class="cover-heading">
               What makes people feel
               <div class="btn-group">
@@ -115,51 +115,36 @@
           var path = videosList[i].file;
 
           //retrieves a list of corresponding videos
-          //and stores it into pathList
+          //and stores it into pathList as an array
           if (value1.length == tag.length + 2 && value2.length == loc.length + 2) {
-
             pathList.push(path);
-            console.log(pathList[2]);
+            //console.log(pathList[2]);
 
-            /*+ ',';
-            //console.log(pathList);
-            //var arr = $.makeArray(pathList);
-            var myArray = pathList.split(',');
-            console.log(myArray);
-*/
             //empty text
             //injects popcorn function
-            //$("#toempty").empty();
-
-            /*var sequence = Popcorn.sequence("toempty",
+            $("#toempty").empty();
+            var sequence = Popcorn.sequence("toempty",
               [
                 {
-                  src: "http://videos.mozilla.org/serv/webmademovies/atultroll.webm",
+                  src: pathList[0],
                   in: 0,
-                  out: 3
+                  out: 12
                 },
                 {
-                  src: "http://videos.mozilla.org/serv/webmademovies/justintime.ogv",
-                  in: 174,
-                  out: 180
+                  src: pathList[1],
+                  in: 0,
+                  out: 12
                 },
                   {
-                  src: "http://videos.mozilla.org/serv/webmademovies/popcornplug.ogv",
+                  src: pathList[2],
                   in: 0,
-                  out: 6
+                  out: 12
                 }
               ]);
 
             // play popcorn
             sequence.play();
 
-            // get popcorn object of first video
-            console.log( sequence.eq( 0 ) );
-
-            //exec something at 4 seconds
-            sequence.exec( 4, function() {
-            console.log( "AT 4 SECONDS" );
-            });*/
           }
         }
       }
