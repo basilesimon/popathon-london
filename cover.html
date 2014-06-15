@@ -77,6 +77,7 @@
 
             </h1>
           </div>
+
           <div class="masthead clearfix">
             <div class="inner">
               <ul class="nav masthead-nav">
@@ -86,6 +87,7 @@
               </ul>
             </div>
           </div>
+
           <div class="mastfoot">
             <div class="inner">
               <p>Hacked during Popathon London #3. With love.<span class="glyphicon glyphicon-heart"></span></p>
@@ -116,15 +118,19 @@
 
         //hackily filters the data with the user inputs
         var pathList = [];
+        var lenList = [];
         for (var i=0; i<videosList.length; i++) {
           var tag = videosList[i].tag;
           var loc = videosList[i].location;
           var path = videosList[i].file;
+          var len = videosList[i].length;
 
           //retrieves a list of corresponding videos
           //and stores it into pathList as an array
           if (value1.length == tag.length + 2 && value2.length == loc.length + 2) {
             pathList.push(path);
+            lenList.push(len);
+            //console.log(lenList[0]);
             //console.log(pathList[2]);
 
             //empty text
@@ -135,17 +141,22 @@
                 {
                   src: pathList[0],
                   in: 0,
-                  out: 12
+                  out: lenList[0]
                 },
                 {
                   src: pathList[1],
                   in: 0,
-                  out: 12
+                  out: lenList[1]
                 },
-                  {
+                {
                   src: pathList[2],
                   in: 0,
-                  out: 12
+                  out: lenList[2]
+                },
+                {
+                  src: pathList[3],
+                  in: 0,
+                  out: lenList[3]
                 }
               ]);
 
