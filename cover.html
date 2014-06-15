@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cover</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="http://cdn.popcornjs.org/code/dist/popcorn-complete.js"></script>
+    <script src="https://raw.github.com/rwaldron/popcorn.sequence/master/popcorn.sequence.js"></script>
+    <link href="cover.css" rel="stylesheet">
+    <style>
+    .form-control {
+      background-color: inherit;
+      border: none;
+      border-style: none;
+      font-size: 24px;
+      vertical-align: bottom;
+      color: white;
+    }
+    body {
+      background-color: #4F4F4F;
+    }
+    #submit {
+      background-color: inherit;
+      border: none;
+      border-style: none;
+      font-size: 24px;
+      vertical-align: bottom;
+      color: white;
+    }
+    </style>
+  </head>
+  <body>
+
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead clearfix">
+            <div class="inner">
+              <ul class="nav masthead-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Team</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="inner cover" id="toempty">
+            <h1 class="cover-heading">
+              What makes people feel
+              <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" id="btn1" data-toggle="dropdown" style="background-color:inherit;color:white">
+                  <em id="heretoo">happy</em><span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" id="drop1" role="menu" style="text-shadow:none; background-color:#686868">
+                  <li><a href="#">happy </a></li>
+                  <li><a href="#">angry </a></li>
+                  <li><a href="#">scared </a></li>
+                </ul>
+              </div>
+              in
+              <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" id="btn2" data-toggle="dropdown" style="background-color:inherit;color:white">
+                  <em id="here">Los Angeles</em><span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" id="drop2" role="menu" style="text-shadow:none; background-color:#686868">
+                  <li><a href="#">Los Angeles </a></li>
+                  <li><a href="#">New York </a></li>
+                  <li><a href="#">San Francisco </a></li>
+                </ul>
+              </div>
+            ?
+            <button type="submit" class="btn btn-lg btn-default" id="submit"><span class="glyphicon glyphicon-play-circle"></span>
+            </button>
+
+            </h1>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Hacked during Popathon London #3. With love.<span class="glyphicon glyphicon-heart"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script>
+    //replace the dropdown contents with option selections
+    $(".dropdown-menu li a").click(function(){
+      var selText = $(this).text();
+      $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+    });
+
+    //clicking on the submit button triggers the main function
+    //stores the dropdown values in value1 and value2
+    $("#submit").click(function(){
+      var value1 = $("#btn1").text();
+      var value2 = $("#btn2").text();
+      var videosList = $.getJSON("data/videos.json", foo);
+      function foo(videosList) {
+
+        //console.log(value1 + value1.length);
+        //console.log(videosList[1].tag +  videosList[1].tag.length);
+        //console.log(videosList[1].location === value2);
+        //console.log(videosList[10].location.length + 2 === value2.length)
+
+        //hackily filters the data with the user inputs
+        var pathList = [];
+        for (var i=0; i<videosList.length; i++) {
+          var tag = videosList[i].tag;
+          var loc = videosList[i].location;
+          var path = videosList[i].file;
+
+          //retrieves a list of corresponding videos
+          //and stores it into pathList
+          if (value1.length == tag.length + 2 && value2.length == loc.length + 2) {
+
+            pathList.push(path);
+            console.log(pathList[2]);
+
+            /*+ ',';
+            //console.log(pathList);
+            //var arr = $.makeArray(pathList);
+            var myArray = pathList.split(',');
+            console.log(myArray);
+*/
+            //empty text
+            //injects popcorn function
+            //$("#toempty").empty();
+
+            /*var sequence = Popcorn.sequence("toempty",
+              [
+                {
+                  src: "http://videos.mozilla.org/serv/webmademovies/atultroll.webm",
+                  in: 0,
+                  out: 3
+                },
+                {
+                  src: "http://videos.mozilla.org/serv/webmademovies/justintime.ogv",
+                  in: 174,
+                  out: 180
+                },
+                  {
+                  src: "http://videos.mozilla.org/serv/webmademovies/popcornplug.ogv",
+                  in: 0,
+                  out: 6
+                }
+              ]);
+
+            // play popcorn
+            sequence.play();
+
+            // get popcorn object of first video
+            console.log( sequence.eq( 0 ) );
+
+            //exec something at 4 seconds
+            sequence.exec( 4, function() {
+            console.log( "AT 4 SECONDS" );
+            });*/
+          }
+        }
+      }
+    });
+  </script>
+  </body>
+</html>
